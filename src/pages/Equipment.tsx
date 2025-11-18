@@ -40,79 +40,79 @@ const Equipment: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
         <Card>
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Operational</p>
-              <p className="text-3xl font-bold text-green-600">{equipmentStatusCounts.ok}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Operational</p>
+              <p className="text-2xl sm:text-3xl font-bold text-green-600">{equipmentStatusCounts.ok}</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
-              <CheckCircle size={24} className="text-green-600" />
+            <div className="p-2 sm:p-3 bg-green-100 rounded-lg flex-shrink-0">
+              <CheckCircle size={20} className="sm:w-6 sm:h-6 text-green-600" />
             </div>
           </div>
         </Card>
         <Card>
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Needs Check</p>
-              <p className="text-3xl font-bold text-yellow-600">{equipmentStatusCounts.needsCheck}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Needs Check</p>
+              <p className="text-2xl sm:text-3xl font-bold text-yellow-600">{equipmentStatusCounts.needsCheck}</p>
             </div>
-            <div className="p-3 bg-yellow-100 rounded-lg">
-              <AlertTriangle size={24} className="text-yellow-600" />
+            <div className="p-2 sm:p-3 bg-yellow-100 rounded-lg flex-shrink-0">
+              <AlertTriangle size={20} className="sm:w-6 sm:h-6 text-yellow-600" />
             </div>
           </div>
         </Card>
         <Card>
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Faulty</p>
-              <p className="text-3xl font-bold text-red-600">{equipmentStatusCounts.faulty}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Faulty</p>
+              <p className="text-2xl sm:text-3xl font-bold text-red-600">{equipmentStatusCounts.faulty}</p>
             </div>
-            <div className="p-3 bg-red-100 rounded-lg">
-              <XCircle size={24} className="text-red-600" />
+            <div className="p-2 sm:p-3 bg-red-100 rounded-lg flex-shrink-0">
+              <XCircle size={20} className="sm:w-6 sm:h-6 text-red-600" />
             </div>
           </div>
         </Card>
       </div>
 
       <Card>
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Plane size={20} />
+        <h3 className="text-base lg:text-lg font-semibold mb-4 flex items-center gap-2">
+          <Plane size={18} className="sm:w-5 sm:h-5" />
           Aircraft Fleet Status
         </h3>
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {mockAircraft.map(aircraft => (
-            <div key={aircraft.id} className="border border-gray-200 rounded-lg p-4">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <Plane size={24} className="text-blue-600" />
+            <div key={aircraft.id} className="border border-gray-200 rounded-lg p-3 sm:p-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+                <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                  <div className="p-2 bg-blue-100 rounded-lg flex-shrink-0">
+                    <Plane size={20} className="sm:w-6 sm:h-6 text-blue-600" />
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-lg">{aircraft.tailNumber}</h4>
-                    <p className="text-sm text-gray-600">Aircraft ID: {aircraft.id}</p>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="font-semibold text-base sm:text-lg truncate">{aircraft.tailNumber}</h4>
+                    <p className="text-xs sm:text-sm text-gray-600">Aircraft ID: {aircraft.id}</p>
                   </div>
                 </div>
-                <Badge className={getStatusColor(aircraft.status)}>
+                <Badge className={`${getStatusColor(aircraft.status)} self-start sm:self-auto flex-shrink-0`}>
                   {aircraft.status.replace(/_/g, ' ')}
                 </Badge>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="bg-gray-50 p-3 rounded-lg">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4 text-xs sm:text-sm">
+                <div className="bg-gray-50 p-2 sm:p-3 rounded-lg">
                   <p className="text-gray-600 mb-1">Flight Hours</p>
                   <p className="font-semibold">{aircraft.flightHours.toLocaleString()}</p>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="bg-gray-50 p-2 sm:p-3 rounded-lg">
                   <p className="text-gray-600 mb-1">Next Maintenance</p>
-                  <p className="font-semibold">{formatDate(aircraft.nextMaintenanceDate)}</p>
+                  <p className="font-semibold text-xs">{formatDate(aircraft.nextMaintenanceDate)}</p>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="bg-gray-50 p-2 sm:p-3 rounded-lg">
                   <p className="text-gray-600 mb-1">Status</p>
                   <p className="font-semibold">{aircraft.status.replace(/_/g, ' ')}</p>
                 </div>
-                <div className="bg-gray-50 p-3 rounded-lg">
+                <div className="bg-gray-50 p-2 sm:p-3 rounded-lg">
                   <p className="text-gray-600 mb-1">Readiness</p>
                   <p className="font-semibold">
                     {aircraft.status === 'READY' ? '100%' : aircraft.status === 'ON_MISSION' ? 'In Use' : 'N/A'}

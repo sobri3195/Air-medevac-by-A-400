@@ -44,19 +44,19 @@ const UserManagement: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold">User Management</h2>
-          <p className="text-gray-600 mt-1">Manage system users and their roles</p>
+          <h2 className="text-xl sm:text-2xl font-bold">User Management</h2>
+          <p className="text-sm sm:text-base text-gray-600 mt-1">Manage system users and their roles</p>
         </div>
-        <Button onClick={handleAddUser}>
+        <Button onClick={handleAddUser} className="self-start sm:self-auto">
           <UserPlus size={16} className="mr-2" />
-          Add New User
+          <span className="text-sm sm:text-base">Add New User</span>
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
         {Object.entries({
           MISSION_COMMANDER: users.filter(u => u.role === 'MISSION_COMMANDER').length,
           FLIGHT_CREW: users.filter(u => u.role === 'FLIGHT_CREW').length,

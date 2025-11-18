@@ -37,18 +37,18 @@ const Monitor: React.FC = () => {
   } : { critical: 0, moderate: 0, mild: 0 };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <Card>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Select Mission to Monitor</h3>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+          <h3 className="text-base lg:text-lg font-semibold">Select Mission to Monitor</h3>
           <Badge variant="info">{activeMissions.length} Active Flight(s)</Badge>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {activeMissions.map(mission => (
             <button
               key={mission.id}
               onClick={() => setSelectedMissionId(mission.id)}
-              className={`p-4 rounded-lg border-2 transition-all text-left ${
+              className={`p-3 sm:p-4 rounded-lg border-2 transition-all text-left ${
                 selectedMission?.id === mission.id
                   ? 'border-blue-500 bg-blue-50'
                   : 'border-gray-200 hover:border-gray-300'
@@ -56,9 +56,9 @@ const Monitor: React.FC = () => {
             >
               <div className="flex items-center gap-2 mb-2">
                 <Plane size={16} className={selectedMission?.id === mission.id ? 'text-blue-600' : 'text-gray-600'} />
-                <span className="font-semibold">{mission.id}</span>
+                <span className="text-sm sm:text-base font-semibold">{mission.id}</span>
               </div>
-              <p className="text-sm text-gray-600">{mission.name}</p>
+              <p className="text-xs sm:text-sm text-gray-600 truncate">{mission.name}</p>
               <Badge className={`mt-2 ${getStatusColor(mission.status)}`}>
                 {mission.status}
               </Badge>
@@ -69,10 +69,10 @@ const Monitor: React.FC = () => {
 
       {selectedMission && (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
             <Card className="lg:col-span-2">
-              <h3 className="text-lg font-semibold mb-4">Live Mission View</h3>
-              <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg h-96 relative overflow-hidden">
+              <h3 className="text-base lg:text-lg font-semibold mb-4">Live Mission View</h3>
+              <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg h-64 sm:h-80 lg:h-96 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
                   <div className="absolute" style={{
                     left: '20%',
@@ -106,49 +106,49 @@ const Monitor: React.FC = () => {
                   </svg>
                 </div>
                 
-                <div className="relative z-10 h-full flex flex-col items-center justify-center text-white">
-                  <div className="mb-6 animate-pulse">
-                    <Plane size={64} className="transform rotate-45" />
+                <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4">
+                  <div className="mb-4 sm:mb-6 animate-pulse">
+                    <Plane size={48} className="sm:w-16 sm:h-16 transform rotate-45" />
                   </div>
-                  <h4 className="text-2xl font-bold mb-2">{selectedMission.aircraft.tailNumber}</h4>
-                  <p className="text-blue-200 mb-6">{selectedMission.name}</p>
+                  <h4 className="text-xl sm:text-2xl font-bold mb-2">{selectedMission.aircraft.tailNumber}</h4>
+                  <p className="text-blue-200 mb-4 sm:mb-6 text-sm sm:text-base text-center truncate max-w-full">{selectedMission.name}</p>
                   
-                  <div className="grid grid-cols-3 gap-6 text-center">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 lg:gap-6 text-center w-full max-w-lg">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-4">
                       <p className="text-xs text-blue-200 mb-1">Altitude</p>
-                      <p className="text-2xl font-bold">35,000</p>
+                      <p className="text-lg sm:text-2xl font-bold">35,000</p>
                       <p className="text-xs text-blue-200">ft</p>
                     </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-4">
                       <p className="text-xs text-blue-200 mb-1">Speed</p>
-                      <p className="text-2xl font-bold">450</p>
+                      <p className="text-lg sm:text-2xl font-bold">450</p>
                       <p className="text-xs text-blue-200">knots</p>
                     </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-4">
                       <p className="text-xs text-blue-200 mb-1">ETA</p>
-                      <p className="text-2xl font-bold">{formatTime(selectedMission.eta)}</p>
+                      <p className="text-lg sm:text-2xl font-bold">{formatTime(selectedMission.eta)}</p>
                       <p className="text-xs text-blue-200">local</p>
                     </div>
                   </div>
 
-                  <div className="mt-6 flex items-center gap-8 text-sm">
-                    <div className="flex items-center gap-2">
-                      <MapPin size={16} />
-                      <span>{selectedMission.origin.substring(0, 20)}...</span>
+                  <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-center gap-2 sm:gap-8 text-xs sm:text-sm">
+                    <div className="flex items-center gap-2 truncate max-w-full">
+                      <MapPin size={14} className="flex-shrink-0" />
+                      <span className="truncate">{selectedMission.origin.substring(0, 20)}...</span>
                     </div>
                     <div className="text-blue-300">→</div>
-                    <div className="flex items-center gap-2">
-                      <MapPin size={16} />
-                      <span>{selectedMission.destination.substring(0, 20)}...</span>
+                    <div className="flex items-center gap-2 truncate max-w-full">
+                      <MapPin size={14} className="flex-shrink-0" />
+                      <span className="truncate">{selectedMission.destination.substring(0, 20)}...</span>
                     </div>
                   </div>
                 </div>
               </div>
             </Card>
 
-            <div className="space-y-6">
+            <div className="space-y-4 lg:space-y-6">
               <Card>
-                <h3 className="text-lg font-semibold mb-4">Mission Status</h3>
+                <h3 className="text-base lg:text-lg font-semibold mb-4">Mission Status</h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Status:</span>
@@ -198,13 +198,13 @@ const Monitor: React.FC = () => {
           </div>
 
           <Card>
-            <h3 className="text-lg font-semibold mb-4">Patient Status Board</h3>
+            <h3 className="text-base lg:text-lg font-semibold mb-4">Patient Status Board</h3>
             {selectedMission.patients.length === 0 ? (
               <div className="text-center py-8 text-gray-500">
-                <p>No patients on this flight</p>
+                <p className="text-sm sm:text-base">No patients on this flight</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {selectedMission.patients.map(patient => (
                   <div
                     key={patient.id}
