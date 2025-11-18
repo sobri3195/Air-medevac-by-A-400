@@ -81,70 +81,70 @@ const Reports: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         <Card>
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Total Missions</p>
-              <p className="text-3xl font-bold text-blue-600">{stats.totalMissions}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Missions</p>
+              <p className="text-2xl sm:text-3xl font-bold text-blue-600">{stats.totalMissions}</p>
             </div>
-            <div className="p-3 bg-blue-100 rounded-lg">
-              <Plane size={24} className="text-blue-600" />
+            <div className="p-2 sm:p-3 bg-blue-100 rounded-lg flex-shrink-0">
+              <Plane size={20} className="sm:w-6 sm:h-6 text-blue-600" />
             </div>
           </div>
         </Card>
         <Card>
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Completed</p>
-              <p className="text-3xl font-bold text-green-600">{stats.completedMissions}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Completed</p>
+              <p className="text-2xl sm:text-3xl font-bold text-green-600">{stats.completedMissions}</p>
             </div>
-            <div className="p-3 bg-green-100 rounded-lg">
-              <TrendingUp size={24} className="text-green-600" />
-            </div>
-          </div>
-        </Card>
-        <Card>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Total Patients</p>
-              <p className="text-3xl font-bold text-purple-600">{stats.totalPatients}</p>
-            </div>
-            <div className="p-3 bg-purple-100 rounded-lg">
-              <Users size={24} className="text-purple-600" />
+            <div className="p-2 sm:p-3 bg-green-100 rounded-lg flex-shrink-0">
+              <TrendingUp size={20} className="sm:w-6 sm:h-6 text-green-600" />
             </div>
           </div>
         </Card>
         <Card>
           <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm text-gray-600 mb-1">Avg per Mission</p>
-              <p className="text-3xl font-bold text-yellow-600">{stats.avgPatientsPerMission}</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Patients</p>
+              <p className="text-2xl sm:text-3xl font-bold text-purple-600">{stats.totalPatients}</p>
             </div>
-            <div className="p-3 bg-yellow-100 rounded-lg">
-              <Clock size={24} className="text-yellow-600" />
+            <div className="p-2 sm:p-3 bg-purple-100 rounded-lg flex-shrink-0">
+              <Users size={20} className="sm:w-6 sm:h-6 text-purple-600" />
+            </div>
+          </div>
+        </Card>
+        <Card>
+          <div className="flex items-center justify-between">
+            <div className="flex-1 min-w-0">
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Avg per Mission</p>
+              <p className="text-2xl sm:text-3xl font-bold text-yellow-600">{stats.avgPatientsPerMission}</p>
+            </div>
+            <div className="p-2 sm:p-3 bg-yellow-100 rounded-lg flex-shrink-0">
+              <Clock size={20} className="sm:w-6 sm:h-6 text-yellow-600" />
             </div>
           </div>
         </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
         <Card>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Missions by Type</h3>
-            <Button size="sm" onClick={handleExportMissions}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+            <h3 className="text-base lg:text-lg font-semibold">Missions by Type</h3>
+            <Button size="sm" onClick={handleExportMissions} className="self-start sm:self-auto">
               <Download size={16} className="mr-2" />
               Export
             </Button>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
             <BarChart data={missionTypeData}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" style={{ fontSize: '12px' }} />
-              <YAxis style={{ fontSize: '12px' }} />
+              <XAxis dataKey="name" style={{ fontSize: '10px' }} className="sm:text-xs" />
+              <YAxis style={{ fontSize: '10px' }} className="sm:text-xs" />
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '12px' }} />
               <Bar dataKey="value" fill="#3b82f6" name="Missions" />
             </BarChart>
           </ResponsiveContainer>
@@ -152,9 +152,9 @@ const Reports: React.FC = () => {
 
         <Card>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Mission Status Distribution</h3>
+            <h3 className="text-base lg:text-lg font-semibold">Mission Status Distribution</h3>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
             <PieChart>
               <Pie
                 data={statusData}
@@ -162,9 +162,10 @@ const Reports: React.FC = () => {
                 cy="50%"
                 labelLine={false}
                 label={({ name, percent }) => `${name}: ${((percent || 0) * 100).toFixed(0)}%`}
-                outerRadius={100}
+                outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
+                style={{ fontSize: '11px' }}
               >
                 {statusData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -176,14 +177,14 @@ const Reports: React.FC = () => {
         </Card>
 
         <Card>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Patients by Severity</h3>
-            <Button size="sm" onClick={handleExportPatients}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+            <h3 className="text-base lg:text-lg font-semibold">Patients by Severity</h3>
+            <Button size="sm" onClick={handleExportPatients} className="self-start sm:self-auto">
               <Download size={16} className="mr-2" />
               Export
             </Button>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250} className="sm:h-[300px]">
             <PieChart>
               <Pie
                 data={severityData}
@@ -191,9 +192,10 @@ const Reports: React.FC = () => {
                 cy="50%"
                 labelLine={false}
                 label={({ name, value, percent }) => `${name}: ${value} (${((percent || 0) * 100).toFixed(0)}%)`}
-                outerRadius={100}
+                outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
+                style={{ fontSize: '11px' }}
               >
                 {severityData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={
@@ -275,19 +277,19 @@ const Reports: React.FC = () => {
       </div>
 
       <Card>
-        <h3 className="text-lg font-semibold mb-4">Export Options</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Button onClick={handleExportMissions} className="w-full">
+        <h3 className="text-base lg:text-lg font-semibold mb-4">Export Options</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <Button onClick={handleExportMissions} className="w-full text-sm">
             <Download size={16} className="mr-2" />
-            Export All Missions
+            <span>Export All Missions</span>
           </Button>
-          <Button onClick={handleExportPatients} variant="secondary" className="w-full">
+          <Button onClick={handleExportPatients} variant="secondary" className="w-full text-sm">
             <Download size={16} className="mr-2" />
-            Export All Patients
+            <span>Export All Patients</span>
           </Button>
-          <Button variant="secondary" className="w-full">
+          <Button variant="secondary" className="w-full text-sm sm:col-span-2 lg:col-span-1">
             <Download size={16} className="mr-2" />
-            Generate PDF Report
+            <span>Generate PDF Report</span>
           </Button>
         </div>
       </Card>

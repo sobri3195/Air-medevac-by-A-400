@@ -31,14 +31,16 @@ export const StatCard: React.FC<StatCardProps> = ({ title, value, icon, color = 
   };
 
   return (
-    <Card>
+    <Card className="hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm text-gray-600 mb-1">{title}</p>
-          <p className="text-3xl font-bold text-gray-900">{value}</p>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs sm:text-sm text-gray-600 mb-1 truncate">{title}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900">{value}</p>
         </div>
-        <div className={`p-3 rounded-lg ${colorClasses[color as keyof typeof colorClasses] || colorClasses.blue}`}>
-          {icon}
+        <div className={`p-2 sm:p-3 rounded-lg flex-shrink-0 ml-3 ${colorClasses[color as keyof typeof colorClasses] || colorClasses.blue}`}>
+          <div className="w-5 h-5 sm:w-6 sm:h-6">
+            {icon}
+          </div>
         </div>
       </div>
     </Card>

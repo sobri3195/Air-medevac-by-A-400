@@ -47,19 +47,19 @@ const Missions: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <Card>
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div className="flex flex-col gap-4 mb-6">
           <div className="flex items-center gap-2">
-            <Filter size={20} className="text-gray-600" />
-            <span className="font-medium">Filters</span>
+            <Filter size={18} className="text-gray-600" />
+            <span className="text-sm sm:text-base font-medium">Filters</span>
           </div>
           
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as MissionStatus | 'ALL')}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 sm:flex-none px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="ALL">All Status</option>
               <option value="PLANNING">Planning</option>
@@ -74,7 +74,7 @@ const Missions: React.FC = () => {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 sm:flex-none px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="ALL">All Types</option>
               <option value="TACTICAL">Tactical</option>
@@ -85,10 +85,10 @@ const Missions: React.FC = () => {
 
             <button
               onClick={exportData}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
             >
               <Download size={16} />
-              Export CSV
+              <span>Export CSV</span>
             </button>
           </div>
         </div>
@@ -97,41 +97,41 @@ const Missions: React.FC = () => {
           <TableHead>
             <TableRow>
               <TableHeader>Mission ID</TableHeader>
-              <TableHeader>Name</TableHeader>
-              <TableHeader>Type</TableHeader>
+              <TableHeader className="hidden md:table-cell">Name</TableHeader>
+              <TableHeader className="hidden lg:table-cell">Type</TableHeader>
               <TableHeader>Status</TableHeader>
-              <TableHeader>Origin</TableHeader>
-              <TableHeader>Destination</TableHeader>
-              <TableHeader>ETD</TableHeader>
-              <TableHeader>ETA</TableHeader>
-              <TableHeader>Patients</TableHeader>
+              <TableHeader className="hidden sm:table-cell">Origin</TableHeader>
+              <TableHeader className="hidden sm:table-cell">Destination</TableHeader>
+              <TableHeader className="hidden xl:table-cell">ETD</TableHeader>
+              <TableHeader className="hidden xl:table-cell">ETA</TableHeader>
+              <TableHeader className="hidden md:table-cell">Patients</TableHeader>
               <TableHeader>Actions</TableHeader>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredMissions.map((mission) => (
               <TableRow key={mission.id} className="hover:bg-gray-50">
-                <TableCell className="font-medium">{mission.id}</TableCell>
-                <TableCell>{mission.name}</TableCell>
-                <TableCell>{getMissionTypeLabel(mission.type)}</TableCell>
+                <TableCell className="font-medium text-xs sm:text-sm">{mission.id}</TableCell>
+                <TableCell className="hidden md:table-cell text-xs sm:text-sm">{mission.name}</TableCell>
+                <TableCell className="hidden lg:table-cell text-xs">{getMissionTypeLabel(mission.type)}</TableCell>
                 <TableCell>
                   <Badge className={getStatusColor(mission.status)}>
                     {mission.status}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-xs">{mission.origin}</TableCell>
-                <TableCell className="text-xs">{mission.destination}</TableCell>
-                <TableCell className="text-xs">{formatDate(mission.etd)}</TableCell>
-                <TableCell className="text-xs">{formatDate(mission.eta)}</TableCell>
-                <TableCell>
+                <TableCell className="hidden sm:table-cell text-xs truncate max-w-[150px]">{mission.origin}</TableCell>
+                <TableCell className="hidden sm:table-cell text-xs truncate max-w-[150px]">{mission.destination}</TableCell>
+                <TableCell className="hidden xl:table-cell text-xs">{formatDate(mission.etd)}</TableCell>
+                <TableCell className="hidden xl:table-cell text-xs">{formatDate(mission.eta)}</TableCell>
+                <TableCell className="hidden md:table-cell">
                   <span className="font-medium">{mission.patients.length}</span>
                 </TableCell>
                 <TableCell>
                   <button
                     onClick={() => navigate(`/missions/${mission.id}`)}
-                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                    className="text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-medium whitespace-nowrap"
                   >
-                    View Details
+                    View
                   </button>
                 </TableCell>
               </TableRow>
@@ -141,7 +141,7 @@ const Missions: React.FC = () => {
 
         {filteredMissions.length === 0 && (
           <div className="text-center py-12 text-gray-500">
-            <p>No missions found matching your filters</p>
+            <p className="text-sm sm:text-base">No missions found matching your filters</p>
           </div>
         )}
       </Card>
